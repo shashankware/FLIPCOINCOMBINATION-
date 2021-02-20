@@ -9,6 +9,7 @@ else
    echo "tail"
 fi
 
+
 #!/bin/bash
 declare -A dict
 headcount=0
@@ -27,6 +28,7 @@ head_percentage=$(($headcount*5))
 tail_percentage=$(($tailcount*5))
 dict[H]=$head_percentage
 dict[T]=$tail_percentage
+
 
 
 #!/bin/bash
@@ -77,4 +79,68 @@ dict[HT]=$HTper
 dict[TT]=$TTper
 dict[TH]=$THper
 
+
+#!/bin/bash
+ HHHcount=0
+HHTcount=0
+HTTcount=0
+TTTcount=0
+THTcount=0
+TTHcount=0
+THHcount=0
+HTHcount=0
+
+
+for ((i=1;i<=20;i++))
+do
+   temp=${triplet[$RANDOM % ${#triplet[*]}]}
+   if [ $temp -eq 111 ]
+   then
+      HHHcount=$(($HHHcount+1))
+   elif [ $temp -eq 110 ]
+   then
+      HHTcount=$(($HHTcount+1))
+   elif [ $temp -eq 100 ]
+   then
+      HTTcount=$(($HTTcount+1))
+   elif [ $temp -eq 000 ]
+   then
+      TTTcount=$(($TTTcount+1))
+   elif [ $temp -eq 010 ]
+   then
+      THTcount=$(($THTcount+1))
+   elif [ $temp -eq 011 ]
+   then
+      THHcount=$(($THHcount+1))
+   elif [ $temp -eq 101 ]
+   then
+      HTHcount=$(($HTHcount+1))
+   elif [ $temp -eq 001 ]
+   then
+      TTHcount=$(($TTHcount+1))
+   fi
+done
+
+
+
+HHHper=$(($HHHcount*5))
+HHTper=$(($HHTcount*5))
+HTTper=$(($HTTcount*5))
+TTTper=$(($TTTcount*5))
+THTper=$(($THTcount*5))
+THHper=$(($THHcount*5))
+HTHper=$(($HTHcount*5))
+TTHper=$(($TTHcount*5))
+
+dict[HHH]=$HHHper
+dict[HHT]=$HHTper
+dict[HTT]=$HTTper
+dict[TTT]=$TTTper
+dict[THT]=$THTper
+dict[THH]=$THHper
+dict[HTH]=$HTHper
+dict[TTH]=$TTHper
+
+echo ${!dict[@]}
+echo " " ${dict[@]}
 
